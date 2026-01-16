@@ -14,17 +14,58 @@
 
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>https://www.opensource.org/licenses/mit-license.php</url>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
+
     <developers>
         <developer>
+            <id>kkm237</id>
             <name>Maximilien KENGNE KONGNE</name>
             <email>maximiliendenver@gmail.com</email>
-            <organization>kkm</organization>
+            <url>https://github.com/kkm237</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Africa/Yaounde</timezone>
         </developer>
     </developers>
+    <scm>
+        <connection>scm:git:git://github.com/kkm237/notifier.git</connection>
+        <developerConnection>scm:git:ssh://github.com/kkm237/notifier.git</developerConnection>
+        <url>https://github.com/kkm237/notifier/tree/main</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/kkm237/notifier/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>GitHub Actions</system>
+        <url>https://github.com/kkm237/notifier/actions</url>
+    </ciManagement>
+
+
+        <!-- ========================================== -->
+        <!-- DISTRIBUTION MANAGEMENT (SONATYPE)        -->
+        <!-- ========================================== -->
+
+        <distributionManagement>
+            <snapshotRepository>
+                <id>ossrh</id>
+                <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+            </snapshotRepository>
+            <repository>
+                <id>ossrh</id>
+                <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            </repository>
+        </distributionManagement>
+
     <modules>
         <module>notifier-core</module>
         <module>notifier-email</module>
@@ -67,19 +108,61 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.11.0</version>
-    <!--                <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>-->
                 </plugin>
 
-            <!--    <plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>-->
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals><goal>jar-no-fork</goal></goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.6.3</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals><goal>jar</goal></goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals><goal>sign</goal></goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>net.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>0.4.0</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <publishingServerId>server</publishingServerId>
+                        <tokenAuth>true</tokenAuth>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
+
     </build>
+
+
 
 </project>

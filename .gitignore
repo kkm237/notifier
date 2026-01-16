@@ -34,3 +34,25 @@ build/
 
 build.sh
 /.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test coverage
+*.exec
+.sonar/
+
+# Credentials (IMPORTANT: NE JAMAIS COMMITTER)
+settings.xml
+*.gpg
+*.asc
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
