@@ -151,11 +151,20 @@
                 <plugin>
                     <groupId>net.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.4.0</version>
+                    <version>0.6.0</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <publishingServerId>server</publishingServerId>
+                        <publishingServerId>central</publishingServerId>
                         <autoPublish>true</autoPublish>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                    <configuration>
+                        <skip>true</skip>
                     </configuration>
                 </plugin>
 
