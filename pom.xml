@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.kkm237</groupId>
+    <artifactId>notifier</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>notifier</name>
+
+    <description>Multi-channel notification library for Java applications</description>
+    <url>https://github.com/kkm237/notifier</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Maximilien KENGNE KONGNE</name>
+            <email>maximiliendenver@gmail.com</email>
+            <organization>kkm</organization>
+        </developer>
+    </developers>
+    <modules>
+        <module>notifier-core</module>
+        <module>notifier-email</module>
+        <module>notifier-sms</module>
+        <module>notifier-spring-boot-starter</module>
+        <module>notifier-test</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot.version>4.0.0</spring-boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.kkm237</groupId>
+                <artifactId>notifier-core</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+    <!--                <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>-->
+                </plugin>
+
+            <!--    <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>-->
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
