@@ -90,6 +90,15 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                    <configuration>
+                        <skip>true</skip> </configuration>
+                </plugin>
+
                 <!-- GPG Signing Plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
