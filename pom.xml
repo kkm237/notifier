@@ -110,6 +110,7 @@
                     <version>3.11.0</version>
                 </plugin>
 
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -154,7 +155,7 @@
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>server</publishingServerId>
-                        <tokenAuth>true</tokenAuth>
+                        <autoPublish>true</autoPublish>
                     </configuration>
                 </plugin>
 
