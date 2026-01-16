@@ -56,3 +56,4 @@ settings.xml
 *.bak
 *.swp
 *~
+push.sh
