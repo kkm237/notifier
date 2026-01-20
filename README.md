@@ -9,6 +9,10 @@
 
 ---
 
+## Préréquis
+- Java 17+
+- Maven 3+
+
 ## ✨ Fonctionnalités
 
 - 📧 **Email** - Envoi d'emails avec pièces jointes multiples (HTML/texte)
@@ -33,7 +37,7 @@
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -43,7 +47,7 @@
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-email</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -51,7 +55,7 @@
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-sms</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -59,7 +63,7 @@
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -374,8 +378,6 @@ notifier-spring-boot-starter (Auto-configuration)
 # Tests unitaires
 mvn test
 
-# Tests avec couverture
-mvn test jacoco:report
 ```
 
 ---
