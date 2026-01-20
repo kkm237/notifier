@@ -413,7 +413,7 @@ Ce projet est sous licence Apache 2.0 - voir le fichier [LICENSE](LICENSE) pour 
 - 📧 Email : maximiliendenver@gmail.com
 - 💬 Discord : [Notifier Community](https://discord.gg/notifier)
 - 🐛 Issues : [GitHub Issues](https://github.com/kkm237/notifier/issues)
-- 📖 Documentation : [notifier.io/docs](https://notifier.io/docs)
+- 📖 Documentation : ...
 
 ---
 

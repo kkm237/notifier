@@ -1,13 +1,14 @@
 package io.github.kkm237.notifier.core.model;
 
 import io.github.kkm237.notifier.core.exceptions.NotifierException;
+import io.github.kkm237.notifier.core.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-public class NotifierPayload {
+public final class NotifierPayload {
     private final Channel channel;
     /**
      * subject of notification (mainly for email)
@@ -114,7 +115,8 @@ public class NotifierPayload {
         }
 
         public Builder addRecipient(String recipient) {
-            this.recipients.add(Objects.requireNonNull(recipient, "Recipient cannot be null"));
+            if (StringUtils.isNullOrEmpty(recipient)) throw new NotifierException("Recipient cannot be null or empty");
+            this.recipients.add(recipient);
             return this;
         }
 
@@ -124,7 +126,8 @@ public class NotifierPayload {
         }
 
         public Builder addCc(String ccRecipient) {
-            this.cc.add(Objects.requireNonNull(ccRecipient, "CC recipient cannot be null"));
+            if (StringUtils.isNullOrEmpty(ccRecipient)) throw new NotifierException("CC recipient cannot be null or empty");
+            this.cc.add(ccRecipient);
             return this;
         }
 
@@ -134,7 +137,8 @@ public class NotifierPayload {
         }
 
         public Builder addBcc(String bccRecipient) {
-            this.bcc.add(Objects.requireNonNull(bccRecipient, "BCC recipient cannot be null"));
+            if (StringUtils.isNullOrEmpty(bccRecipient)) throw new NotifierException("BCC recipient cannot be null or empty");
+            this.bcc.add(bccRecipient);
             return this;
         }
 
@@ -144,22 +148,26 @@ public class NotifierPayload {
         }
 
         public Builder subject(String subject) {
-            this.subject = Objects.requireNonNull(subject, "subject cannot be null");
+            if (StringUtils.isNullOrEmpty(subject)) throw new NotifierException("Subject cannot be null or empty");
+            this.subject = subject;
             return this;
         }
 
         public Builder body(String body) {
-            this.body = Objects.requireNonNull(body, "body cannot be null");
+            if (StringUtils.isNullOrEmpty(body)) throw new NotifierException("Body cannot be null or empty");
+            this.body = body;
             return this;
         }
 
         public Builder organizationName(String organizationName) {
-            this.organizationName = Objects.requireNonNull(organizationName, "organizationName cannot be null");
+            if (StringUtils.isNullOrEmpty(organizationName)) throw new NotifierException("Organization name cannot be null or empty");
+            this.organizationName = organizationName;
             return this;
         }
 
         public Builder htmlContent(String htmlContent) {
-            this.htmlContent = Objects.requireNonNull(htmlContent, "htmlContent name cannot be null");
+            if (StringUtils.isNullOrEmpty(htmlContent)) throw new NotifierException("HTML content cannot be null or empty");
+            this.htmlContent = htmlContent;
             return this;
         }
 

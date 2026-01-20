@@ -6,15 +6,54 @@
     <parent>
         <groupId>io.github.kkm237</groupId>
         <artifactId>notifier</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
+    <name>notifier-test</name>
+    <description>module which centralize the test of all other module</description>
+    <url>https://github.com/kkm237/notifier</url>
     <artifactId>notifier-test</artifactId>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>kkm237</id>
+            <name>Maximilien KENGNE KONGNE</name>
+            <email>maximiliendenver@gmail.com</email>
+            <url>https://github.com/kkm237</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Africa/Yaounde</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/kkm237/notifier.git</connection>
+        <developerConnection>scm:git:ssh://github.com/kkm237/notifier.git</developerConnection>
+        <url>https://github.com/kkm237/notifier/tree/main</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/kkm237/notifier/issues</url>
+    </issueManagement>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Ignore this module while deployment -->
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.install.skip>true</maven.install.skip>
     </properties>
 
     <dependencies>
@@ -22,37 +61,8 @@
         <dependency>
             <groupId>io.github.kkm237</groupId>
             <artifactId>notifier-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
-
-        <!-- Testing -->
-<!--        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.10.1</version>
-            <scope>test</scope>
-        </dependency>-->
-
-<!--        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.8.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.8.0</version>
-            <scope>test</scope>
-        </dependency>-->
-
-<!--        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
-            <scope>test</scope>
-        </dependency>-->
 
         <!-- GreenMail - Serveur SMTP in-memory pour tests -->
         <dependency>
@@ -73,52 +83,11 @@
 
     <build>
         <plugins>
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-configuration-processor</artifactId>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>-->
-
-<!--
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-
-
-            </plugin>-->
             <!--use this config to resolve this warning :  Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.2</version>
-            </plugin>
-
-            <!-- JaCoCo pour la couverture de code -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>

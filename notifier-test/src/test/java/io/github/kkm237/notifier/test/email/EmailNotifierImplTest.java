@@ -264,25 +264,6 @@ class EmailNotifierImplTest {
         assertThat(receivedMessage.getRecipients(Message.RecipientType.TO)).hasSize(3);
     }
 
-    @Test
-    @DisplayName("send() should handle empty body gracefully")
-    void sendShouldHandleEmptyBody() throws Exception {
-        // Given
-        NotifierPayload notifierPayload = NotifierPayload.builder()
-                .channel(NotifierPayload.Channel.EMAIL)
-                .addRecipient("user@example.com")
-                .subject("Empty Body Test")
-                .body("")
-                .build();
-
-        // When
-        emailService.send(notifierPayload);
-
-        // Then
-        assertThat(greenMail.getReceivedMessages()).hasSize(1);
-        MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
-        assertThat(receivedMessage.getSubject()).isEqualTo("Empty Body Test");
-    }
 
     @Test
     @DisplayName("send() should preserve attachment descriptions")

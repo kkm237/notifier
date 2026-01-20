@@ -8,7 +8,7 @@ Module de base contenant les API et interfaces communes pour tous les canaux de 
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

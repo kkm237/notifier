@@ -6,10 +6,46 @@
     <parent>
         <groupId>io.github.kkm237</groupId>
         <artifactId>notifier</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
+    <name>notifier-email</name>
     <artifactId>notifier-email</artifactId>
+    <description>Module which manage email notification</description>
+    <url>https://github.com/kkm237/notifier</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>kkm237</id>
+            <name>Maximilien KENGNE KONGNE</name>
+            <email>maximiliendenver@gmail.com</email>
+            <url>https://github.com/kkm237</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Africa/Yaounde</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/kkm237/notifier.git</connection>
+        <developerConnection>scm:git:ssh://github.com/kkm237/notifier.git</developerConnection>
+        <url>https://github.com/kkm237/notifier/tree/main</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/kkm237/notifier/issues</url>
+    </issueManagement>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -29,10 +65,6 @@
             <artifactId>jakarta.mail</artifactId>
             <version>2.0.2</version>
         </dependency>
-
     </dependencies>
-
-
-
 
 </project>

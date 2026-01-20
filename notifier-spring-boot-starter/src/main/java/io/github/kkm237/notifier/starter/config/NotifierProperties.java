@@ -46,19 +46,23 @@ public class NotifierProperties {
 
     public static class Email {
         private boolean enabled = false;
-        private String host;
+        private String protocol = "smtp";
+        private String host = "smtp.gmail.com";
         private int port = 587;
         private String username;
         private String password;
         private String from;
-        private boolean startTlsEnabled = true;
-        private boolean authEnabled = true;
+        private Boolean startTlsEnabled = true;
+        private Boolean authEnabled = true;
+        private Boolean sslEnabled = false;
+        private Boolean debug = false;
 
         public Email() {
         }
 
-        public Email(boolean enabled, String host, int port, String username, String password, String from, boolean startTlsEnabled, boolean authEnabled) {
+        public Email(boolean enabled, String protocol, String host, int port, String username, String password, String from, Boolean startTlsEnabled, Boolean authEnabled, Boolean sslEnabled, Boolean debug) {
             this.enabled = enabled;
+            this.protocol = protocol;
             this.host = host;
             this.port = port;
             this.username = username;
@@ -66,6 +70,8 @@ public class NotifierProperties {
             this.from = from;
             this.startTlsEnabled = startTlsEnabled;
             this.authEnabled = authEnabled;
+            this.sslEnabled = sslEnabled;
+            this.debug = debug;
         }
 
         public boolean isEnabled() {
@@ -130,6 +136,46 @@ public class NotifierProperties {
 
         public void setAuthEnabled(boolean authEnabled) {
             this.authEnabled = authEnabled;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public Boolean getStartTlsEnabled() {
+            return startTlsEnabled;
+        }
+
+        public void setStartTlsEnabled(Boolean startTlsEnabled) {
+            this.startTlsEnabled = startTlsEnabled;
+        }
+
+        public Boolean getAuthEnabled() {
+            return authEnabled;
+        }
+
+        public void setAuthEnabled(Boolean authEnabled) {
+            this.authEnabled = authEnabled;
+        }
+
+        public Boolean getSslEnabled() {
+            return sslEnabled;
+        }
+
+        public void setSslEnabled(Boolean sslEnabled) {
+            this.sslEnabled = sslEnabled;
+        }
+
+        public Boolean getDebug() {
+            return debug;
+        }
+
+        public void setDebug(Boolean debug) {
+            this.debug = debug;
         }
     }
 

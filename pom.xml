@@ -5,10 +5,10 @@
 
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
-    <name>notifier</name>
 
+    <name>notifier</name>
     <description>Multi-channel notification library for Java applications</description>
     <url>https://github.com/kkm237/notifier</url>
 
@@ -45,10 +45,6 @@
         <url>https://github.com/kkm237/notifier/issues</url>
     </issueManagement>
 
-    <ciManagement>
-        <system>GitHub Actions</system>
-        <url>https://github.com/kkm237/notifier/actions</url>
-    </ciManagement>
 
     <modules>
         <module>notifier-core</module>
@@ -79,13 +75,11 @@
             <dependency>
                 <groupId>io.github.kkm237</groupId>
                 <artifactId>notifier-core</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
-
-
 
     <build>
 
@@ -98,7 +92,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
 
             <plugins>
                 <!-- Central Publishing Plugin -->
@@ -125,7 +118,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>3.1.0</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -135,9 +128,18 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <!-- Retrieves passphrase from settings.xml -->
+                        <passphraseServerId>gpg.passphrase</passphraseServerId>
+                        <!-- Required for gpg2 to avoid GUI prompts -->
+                        <gpgArguments>
+                            <arg>--pinentry-mode</arg>
+                            <arg>loopback</arg>
+                        </gpgArguments>
+                        <!-- Ensure correct GPG binary is used -->
+                        <executable>gpg</executable>
+                    </configuration>
                 </plugin>
-
-
 
                 <!-- Javadoc and source attachement  -->
                 <plugin>
@@ -153,14 +155,29 @@
                         </execution>
                     </executions>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.6.3</version>
                     <configuration>
-                        <additionalJOption>-tag apiNote:a:"API Note:"</additionalJOption>
-                        <additionalJOption>-tag implSpec:a:"Implementation Requirements:"</additionalJOption>
-                        <additionalJOption>-tag implNote:a:"Implementation Note:"</additionalJOption>
+                        <tags>
+                            <tag>
+                                <name>apiNote</name>
+                                <placement>a</placement>
+                                <head>API Note:</head>
+                            </tag>
+                            <tag>
+                                <name>implSpec</name>
+                                <placement>a</placement>
+                                <head>Implementation Requirements:</head>
+                            </tag>
+                            <tag>
+                                <name>implNote</name>
+                                <placement>a</placement>
+                                <head>Implementation Note:</head>
+                            </tag>
+                        </tags>
                     </configuration>
                     <executions>
                         <execution>
@@ -173,10 +190,6 @@
                 </plugin>
             </plugins>
 
-
-
     </build>
-
-
 
 </project>

@@ -2,6 +2,7 @@ package io.github.kkm237.notifier.core.model;
 
 
 import io.github.kkm237.notifier.core.exceptions.NotifierException;
+import io.github.kkm237.notifier.core.utils.StringUtils;
 
 import java.io.File;
 import java.io.InputStream;
@@ -11,7 +12,7 @@ import java.util.Objects;
 /**
  * mainly for email
  */
-public class AttachmentPayload {
+public final class AttachmentPayload {
 
     private final String filename;
     private final String contentType;
@@ -57,7 +58,7 @@ public class AttachmentPayload {
                 '}';
     }
 
-    public AttachmentPayload(Builder builder) {
+    private AttachmentPayload(Builder builder) {
         this.filename = builder.filename;
         this.contentType = builder.contentType;
         this.description = builder.description;
@@ -82,31 +83,37 @@ public class AttachmentPayload {
         private Builder() {}
 
         public Builder filename(String filename){
-            this.filename = Objects.requireNonNull(filename, "filename must not be null");
+            if (StringUtils.isNullOrEmpty(filename)) throw new NotifierException("Filename cannot be null or empty");
+            this.filename = filename;
             return this;
         }
         public Builder contentType(String contentType){
-            this.contentType = Objects.requireNonNull(contentType, "contentType must not be null");
+            if (StringUtils.isNullOrEmpty(contentType)) throw new NotifierException("Content type cannot be null or empty");
+            this.contentType = contentType;
             return this;
         }
 
         public Builder content(byte[] content){
-            this.content = Objects.requireNonNull(content, "content must not be null");
+            if (content == null) throw new NotifierException("Content cannot be null");
+            this.content = content;
             return this;
         }
 
         public Builder description(String description){
-            this.description = Objects.requireNonNull(description, "description must not be null");
+            if (StringUtils.isNullOrEmpty(description)) throw new NotifierException("Description cannot be null or empty");
+            this.description = description;
             return this;
         }
 
         public Builder file(File file){
-            this.file = Objects.requireNonNull(file, "file must not be null");
+            if (file == null) throw new NotifierException("File cannot be null");
+            this.file = file;
             return this;
         }
 
         public Builder inputStream(InputStream inputStream){
-            this.inputStream = Objects.requireNonNull(inputStream, "inputStream must not be null");
+            if (inputStream == null) throw new NotifierException("InputStream cannot be null");
+            this.inputStream = inputStream;
             return this;
         }
 

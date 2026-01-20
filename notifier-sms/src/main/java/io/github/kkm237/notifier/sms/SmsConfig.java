@@ -1,10 +1,11 @@
 package io.github.kkm237.notifier.sms;
 
 import io.github.kkm237.notifier.core.exceptions.NotifierException;
+import io.github.kkm237.notifier.core.utils.StringUtils;
 
 import java.util.Objects;
 
-public class SmsConfig {
+public final class SmsConfig {
 
     private final String accountSid;
     private final String authToken;
@@ -41,34 +42,27 @@ public class SmsConfig {
         private Builder() {}
 
         public Builder accountSid(String accountSid) {
-            this.accountSid = Objects.requireNonNull(accountSid, "accountSid cannot be null");
+            if (StringUtils.isNullOrEmpty(accountSid)) throw new NotifierException("accountSid is null or empty");
+            this.accountSid = accountSid;
             return this;
         }
 
         public Builder authToken(String authToken) {
-            this.authToken = Objects.requireNonNull(authToken, "authToken cannot be null");
+            if (StringUtils.isNullOrEmpty(authToken)) throw new NotifierException("authToken is null or empty");
+            this.authToken = authToken;
             return this;
         }
 
         public Builder fromPhone(String fromPhone) {
-            this.fromPhone = Objects.requireNonNull(fromPhone, "fromPhone cannot be null");
+            if (StringUtils.isNullOrEmpty(fromPhone)) throw new NotifierException("fromPhone is null or empty");
+            this.fromPhone = fromPhone;
             return this;
         }
 
         public SmsConfig build() {
-
-            if (accountSid.isEmpty()) {
-                throw new NotifierException("accountSid is required");
-            }
-
-            if (authToken.isEmpty()) {
-                throw new NotifierException("authToken is required");
-            }
-
-            if (fromPhone.isEmpty()) {
-                throw new NotifierException("fromPhone is required");
-            }
-
+            if (StringUtils.isNullOrEmpty(accountSid)) throw new NotifierException("accountSid is null or empty");
+            if (StringUtils.isNullOrEmpty(authToken)) throw new NotifierException("authToken is null or empty");
+            if (StringUtils.isNullOrEmpty(fromPhone)) throw new NotifierException("fromPhone is null or empty");
             return new SmsConfig(this);
         }
 

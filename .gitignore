@@ -57,3 +57,4 @@ settings.xml
 *.swp
 *~
 push.sh
+deploy.sh

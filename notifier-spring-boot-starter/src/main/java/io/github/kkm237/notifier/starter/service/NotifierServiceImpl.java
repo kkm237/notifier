@@ -22,7 +22,7 @@ public class NotifierServiceImpl implements NotifierService {
     public NotifierServiceImpl(List<Notifier> notifiers) {
          // call getChannel() on each instance and associate the key at the matching instance
         this.channelNotifierMap = notifiers.stream().collect(Collectors.toMap(Notifier::getChannel, Function.identity()));
-        log.info("CourierSender initialized with channels: {}" + channelNotifierMap.keySet());
+        log.info("Notifier initialized with channels: {}" + channelNotifierMap.keySet());
     }
 
 

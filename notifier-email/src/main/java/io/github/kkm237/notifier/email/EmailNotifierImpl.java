@@ -10,19 +10,15 @@ import jakarta.mail.internet.*;
 import jakarta.mail.util.ByteArrayDataSource;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Properties;
-import java.util.UUID;
-import java.util.logging.Level;
+import java.util.*;
 import java.util.logging.Logger;
 
 
 public class EmailNotifierImpl implements Notifier {
 
-    private static final Logger log = Logger.getLogger(EmailNotifierImpl.class.getName());
     private final Session session;
     private final String fromEmail;
+    Logger log = Logger.getLogger(EmailNotifierImpl.class.getName());
 
     /**
      * Constructor with personalized configuration
@@ -30,19 +26,17 @@ public class EmailNotifierImpl implements Notifier {
     public EmailNotifierImpl(EmailConfig config) {
         this.fromEmail = config.getFromEmail();
         this.session = createSession(config);
-        log.info("Email notification service initialized for :" +fromEmail);
     }
 
 
     @Override
     public void send(NotifierPayload payload) {
-        log.info("Sending email notification to: " + payload.getRecipients().toString() + " with " + payload.getCourierAttachments().size() + " attachment(s)" + payload.getCourierAttachments().toString());
-        Calendar calendar = Calendar.getInstance();
+
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail, payload.getOrganizationName()));
             message.setSubject(payload.getSubject());
-            message.setSentDate(calendar.getTime());
+            message.setSentDate(new Date());
 
             if (payload.getReplyTo()!= null) {
                 message.setReplyTo(InternetAddress.parse(payload.getReplyTo()));
@@ -83,17 +77,12 @@ public class EmailNotifierImpl implements Notifier {
             }
 
             Transport.send(message);
-            String notificationId = UUID.randomUUID().toString();
-            log.info("Email sent successfully. Notification ID: " + notificationId);
-
+            log.info("Mail sent successfully.");
         } catch (SendFailedException e) {
-            log.log(Level.WARNING, "Email partially sent. Invalid addresses: " + Arrays.toString(e.getInvalidAddresses()));
             throw new NotifierSendFailedException("Partial failure: " + e.getMessage(), e);
         } catch (MessagingException e) {
-            log.log(Level.SEVERE, "Fail sending email", e);
             throw new NotifierSendFailedException("Messaging error: " + e.getMessage(), e);
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Unexpected error while sending email", e);
             throw new NotifierSendFailedException("Unexpected error: " + e.getMessage(), e);
         }
     }
@@ -102,7 +91,6 @@ public class EmailNotifierImpl implements Notifier {
 
             Multipart multipart = new MimeMultipart("mixed");
 
-            // Corps du message
             MimeBodyPart bodyPart = new MimeBodyPart();
             if (request.getHtmlContent() != null) {
                 bodyPart.setContent(request.getHtmlContent(), "text/html; charset=UTF-8");
@@ -120,7 +108,6 @@ public class EmailNotifierImpl implements Notifier {
 
 
         private MimeBodyPart createAttachmentPart(AttachmentPayload attachment) throws MessagingException, IOException {
-            log.info("start build courier attachment : ");
 
             MimeBodyPart attachmentPart = new MimeBodyPart();
             if (attachment.getContent() != null) {
@@ -140,7 +127,6 @@ public class EmailNotifierImpl implements Notifier {
             attachmentPart.setFileName(attachment.getFilename());
             attachmentPart.setDescription(attachment.getDescription(), "UTF-8");
 
-           // log.info("Added attachment, filename: " +attachment.getFilename() +" contentType : " +attachment.getContentType());
             return attachmentPart;
         }
 
@@ -149,32 +135,42 @@ public class EmailNotifierImpl implements Notifier {
          */
         private Session createSession(EmailConfig config) {
 
-            Properties props = new Properties();
+            String username = config.getUsername();
+            String password = config.getPassword();
 
+            Properties props = new Properties();
+            props.put("mail.transport.protocol", config.getProtocol());
             props.put("mail.smtp.host", config.getHost());
             props.put("mail.smtp.port", String.valueOf(config.getPort()));
             props.put("mail.smtp.auth", String.valueOf(config.isAuthEnabled()));
-            props.put("mail.smtp.user", config.getUsername());
+            props.put("mail.smtp.user", username);
             props.put("mail.debug", String.valueOf(config.isDebug()));
-            // Propriétés additionnelles pour plus de compatibilité
+
+            /* MIME & encoding */
             props.put("mail.mime.charset", "UTF-8");
+            props.put("mail.mime.allowutf8", "true");
+            props.put("mail.mime.encodefilename", "true");
+
+            /* Timeouts */
             props.put("mail.smtp.timeout", "10000");
             props.put("mail.smtp.connectiontimeout", "10000");
+            props.put("mail.smtp.writetimeout", "10000");
 
-            /* Choix EXCLUSIF SSL vs STARTTLS */
+            String protocol = config.getProtocol();
+
             if (config.isSslEnabled()) {
                 // Port 465
-                props.put("mail.smtp.ssl.enable", "true");
+                props.put("mail." + protocol + ".ssl.enable", "true");
             } else if (config.isStartTlsEnabled()) {
                 // Port 587
-                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail." + protocol + ".starttls.enable", "true");
             }
 
             if (config.isAuthEnabled()) {
                 return Session.getInstance(props, new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication( config.getUsername(), config.getPassword() );
+                        return new PasswordAuthentication( username, password);
                     }
                 });
             }

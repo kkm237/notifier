@@ -18,13 +18,10 @@ public class SmsNotifierImpl implements Notifier {
     public SmsNotifierImpl(SmsConfig config) {
         Twilio.init(config.getAccountSid(), config.getAuthToken());
         this.fromPhoneNumber = config.getFromPhone();
-        log.info("SMS notification service initialized with Twilio");
     }
 
     @Override
     public void send(NotifierPayload payload) {
-        log.info("Sending SMS notification to: {}" + payload.getRecipients());
-
         try {
 
             if (!payload.getRecipients().isEmpty() && payload.getRecipients() != null) {
@@ -37,7 +34,6 @@ public class SmsNotifierImpl implements Notifier {
             }
 
         } catch (Exception e) {
-            log.log(Level.SEVERE,"Failed to send SMS to: {}" + payload.getRecipients().size(), e);
             throw new NotifierSendFailedException( "Failed to send SMS: " + e.getMessage(),e );
         }
     }

@@ -7,37 +7,37 @@ import io.github.kkm237.notifier.sms.SmsConfig;
 import io.github.kkm237.notifier.sms.SmsNotifierImpl;
 import io.github.kkm237.notifier.starter.service.NotifierService;
 import io.github.kkm237.notifier.starter.service.NotifierServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
 
 
+@Configuration
 @AutoConfiguration
 @EnableConfigurationProperties(NotifierProperties.class)
 public class NotifierAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(NotifierAutoConfiguration.class);
-
     @Bean
     @ConditionalOnProperty(prefix = "notifier.email", name = "enabled", havingValue = "true")
     public Notifier emailNotifierImpl(NotifierProperties properties) {
-        log.info("Initializing EmailNotifierImpl");
-        NotifierProperties.Email emailProps = properties.getEmail();
+        NotifierProperties.Email props = properties.getEmail();
 
         EmailConfig config = EmailConfig.builder()
-                .host(emailProps.getHost())
-                .port(emailProps.getPort())
-                .username(emailProps.getUsername())
-                .password(emailProps.getPassword())
-                .fromEmail(emailProps.getFrom())
-                .startTlsEnabled(emailProps.isStartTlsEnabled())
-                .authEnabled(emailProps.isAuthEnabled())
+                .protocol(props.getProtocol())
+                .host(props.getHost())
+                .port(props.getPort())
+                .username(props.getUsername())
+                .password(props.getPassword())
+                .fromEmail(props.getFrom())
+                .startTlsEnabled(props.isStartTlsEnabled())
+                .sslEnabled(props.getSslEnabled())
+                .authEnabled(props.isAuthEnabled())
+                .debug(props.getDebug())
                 .build();
 
         return new EmailNotifierImpl(config);
@@ -46,7 +46,6 @@ public class NotifierAutoConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "notifier.sms", name = "enabled", havingValue = "true")
     public Notifier smsNotifierImpl(NotifierProperties properties) {
-        log.info("Initializing SmsNotifierImpl");
         NotifierProperties.Sms sms = properties.getSms();
 
         SmsConfig config = SmsConfig.builder()
@@ -60,7 +59,6 @@ public class NotifierAutoConfiguration {
 
     @Bean
     public NotifierService notifierService(List<Notifier> notifiers) {
-        log.info("Initializing NotifierServiceImpl with {} services ", notifiers.size());
         return new NotifierServiceImpl(notifiers);
     }
 }
