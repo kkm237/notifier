@@ -52,6 +52,7 @@
         <module>notifier-sms</module>
         <module>notifier-spring-boot-starter</module>
         <module>notifier-test</module>
+        <module>notifier-whatsapp</module>
     </modules>
 
     <properties>

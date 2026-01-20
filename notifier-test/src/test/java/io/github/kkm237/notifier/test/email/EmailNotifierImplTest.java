@@ -23,7 +23,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-
+/**
+ * @implNote unit test for {@link io.github.kkm237.notifier.email.EmailNotifierImpl}
+ * @author <a href="mailto:maximiliendenver@gmail.com">Maximilien kengne kongne</a>
+ * @since 16.01.2026
+ * @version 1.0.0
+ */
 @DisplayName("EmailNotifierImplTest")
 class EmailNotifierImplTest {
 

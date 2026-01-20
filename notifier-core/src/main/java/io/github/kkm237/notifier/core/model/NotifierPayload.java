@@ -116,6 +116,7 @@ public final class NotifierPayload {
 
         public Builder addRecipient(String recipient) {
             if (StringUtils.isNullOrEmpty(recipient)) throw new NotifierException("Recipient cannot be null or empty");
+            if (!StringUtils.isValidEmail(recipient)) throw new NotifierException("Recipient is not valid");
             this.recipients.add(recipient);
             return this;
         }
@@ -127,6 +128,7 @@ public final class NotifierPayload {
 
         public Builder addCc(String ccRecipient) {
             if (StringUtils.isNullOrEmpty(ccRecipient)) throw new NotifierException("CC recipient cannot be null or empty");
+            if (!StringUtils.isValidEmail(ccRecipient)) throw new NotifierException("CC recipient is not valid");
             this.cc.add(ccRecipient);
             return this;
         }
@@ -138,6 +140,7 @@ public final class NotifierPayload {
 
         public Builder addBcc(String bccRecipient) {
             if (StringUtils.isNullOrEmpty(bccRecipient)) throw new NotifierException("BCC recipient cannot be null or empty");
+            if (StringUtils.isValidEmail(bccRecipient)) throw new NotifierException("BCC recipient is not valid");
             this.bcc.add(bccRecipient);
             return this;
         }
@@ -177,7 +180,9 @@ public final class NotifierPayload {
         }
 
         public Builder replyTo(String replyTo) {
-            this.replyTo = Objects.requireNonNull(replyTo, "ReplyTO cannot be null");
+            if (StringUtils.isNullOrEmpty(replyTo)) throw new NotifierException("Reply To cannot be null or empty");
+            if (!StringUtils.isValidEmail(replyTo)) throw new NotifierException("Reply To is not valid");
+            this.replyTo = replyTo;
             return this;
         }
 

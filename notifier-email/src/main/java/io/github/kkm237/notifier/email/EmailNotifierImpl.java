@@ -13,7 +13,13 @@ import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
-
+/**
+ * @implNote Send Email notification {@link  io.github.kkm237.notifier.email.EmailConfig}
+ * @author Maximilien kengne kongne
+ * @since 16.01.2026
+ * @version 1.0.0
+ * @see io.github.kkm237.notifier.core.model.AttachmentPayload
+ */
 public class EmailNotifierImpl implements Notifier {
 
     private final Session session;
@@ -139,7 +145,7 @@ public class EmailNotifierImpl implements Notifier {
             String password = config.getPassword();
 
             Properties props = new Properties();
-            props.put("mail.transport.protocol", config.getProtocol());
+            props.put("mail.transport.protocol", "smtp");
             props.put("mail.smtp.host", config.getHost());
             props.put("mail.smtp.port", String.valueOf(config.getPort()));
             props.put("mail.smtp.auth", String.valueOf(config.isAuthEnabled()));
@@ -156,14 +162,12 @@ public class EmailNotifierImpl implements Notifier {
             props.put("mail.smtp.connectiontimeout", "10000");
             props.put("mail.smtp.writetimeout", "10000");
 
-            String protocol = config.getProtocol();
-
             if (config.isSslEnabled()) {
                 // Port 465
-                props.put("mail." + protocol + ".ssl.enable", "true");
+                props.put("mail.smtp.ssl.enable", "true");
             } else if (config.isStartTlsEnabled()) {
                 // Port 587
-                props.put("mail." + protocol + ".starttls.enable", "true");
+                props.put("mail.smtp.starttls.enable", "true");
             }
 
             if (config.isAuthEnabled()) {
@@ -187,6 +191,4 @@ public class EmailNotifierImpl implements Notifier {
         public NotifierPayload.Channel getChannel() {
             return NotifierPayload.Channel.EMAIL;
         }
-
-
     }

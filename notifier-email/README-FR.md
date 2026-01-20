@@ -181,12 +181,6 @@ NotifierPayload payload = NotifierPayload.builder()
 | `.png` | `image/png` |
 | `.jpg` | `image/jpeg` |
 
-## 🧪 Tests
-
-```bash
-cd notifier-email
-mvn test
-```
 
 ## 📚 Voir aussi
 

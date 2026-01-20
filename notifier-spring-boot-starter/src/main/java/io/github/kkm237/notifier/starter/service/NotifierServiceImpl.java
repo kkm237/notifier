@@ -11,8 +11,14 @@ import java.util.stream.Collectors;
 
 
 
+
+
 /**
- * main class which centralize the access of different services of de notification
+ * @implNote Send notification via all supported channels {@link io.github.kkm237.notifier.core.model.NotifierPayload.Channel}
+ * @author Maximilien kengne kongne
+ * @since 16.01.2026
+ * @version 1.0.0
+ * @see io.github.kkm237.notifier.core.model.NotifierPayload
  */
 public class NotifierServiceImpl implements NotifierService {
 

@@ -8,8 +8,9 @@
         <artifactId>notifier</artifactId>
         <version>1.0.1</version>
     </parent>
-    <name>notifier-sms</name>
+
     <artifactId>notifier-sms</artifactId>
+    <name>notifier-sms</name>
     <description>Module which manage sms notification</description>
     <url>https://github.com/kkm237/notifier</url>
 

@@ -3,7 +3,12 @@ package io.github.kkm237.notifier.starter.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-
+/**
+ * @implNote properties of all channels configuration
+ * @author Maximilien kengne kongne
+ * @since 16.01.2026
+ * @version 1.0.0
+ */
 @ConfigurationProperties(prefix = "notifier")
 public class NotifierProperties {
 

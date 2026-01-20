@@ -1,16 +1,15 @@
-package io.github.kkm237.notifier.sms;
+package io.github.kkm237.notifier.whatsapp;
 
 import io.github.kkm237.notifier.core.exceptions.NotifierException;
 import io.github.kkm237.notifier.core.utils.StringUtils;
 
-import java.util.Objects;
 /**
- * @implNote sms configuration
+ * @implNote WhatsApp configuration
  * @author Maximilien kengne kongne
  * @since 16.01.2026
  * @version 1.0.0
  */
-public final class SmsConfig {
+public final class WhatsAppConfig {
 
     private final String accountSid;
     private final String authToken;
@@ -28,7 +27,7 @@ public final class SmsConfig {
         return fromPhone;
     }
 
-    private SmsConfig(Builder builder) {
+    private WhatsAppConfig(Builder builder) {
         this.accountSid = builder.accountSid;
         this.authToken = builder.authToken;
         this.fromPhone = builder.fromPhone;
@@ -60,17 +59,17 @@ public final class SmsConfig {
 
         public Builder fromPhone(String fromPhone) {
             if (StringUtils.isNullOrEmpty(fromPhone)) throw new NotifierException("fromPhone is null or empty");
-            if (!StringUtils.isValidPhoneNumber(fromPhone)) throw  new NotifierException("fromPhone is not valid");
+            if (StringUtils.isValidPhoneNumber(fromPhone)) throw  new NotifierException("fromPhone is not valid");
             this.fromPhone = fromPhone;
             return this;
         }
 
-        public SmsConfig build() {
+        public WhatsAppConfig build() {
             if (StringUtils.isNullOrEmpty(accountSid)) throw new NotifierException("accountSid is null or empty");
             if (StringUtils.isNullOrEmpty(authToken)) throw new NotifierException("authToken is null or empty");
             if (StringUtils.isNullOrEmpty(fromPhone)) throw new NotifierException("fromPhone is null or empty");
-            if (!StringUtils.isValidPhoneNumber(fromPhone)) throw  new NotifierException("fromPhone is not valid");
-            return new SmsConfig(this);
+            if (StringUtils.isValidPhoneNumber(fromPhone)) throw  new NotifierException("fromPhone is not valid");
+            return new WhatsAppConfig(this);
         }
 
     }

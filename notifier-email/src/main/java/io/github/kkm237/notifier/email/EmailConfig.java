@@ -5,9 +5,14 @@ import io.github.kkm237.notifier.core.utils.StringUtils;
 
 import java.util.Objects;
 
+/**
+ * @implNote Email configuration
+ * @author Maximilien kengne kongne
+ * @since 16.01.2026
+ * @version 1.0.0
+ */
 public final class EmailConfig {
 
-    private final String protocol;
     private final String host;
     private final Integer port;
     private final String username;
@@ -17,10 +22,6 @@ public final class EmailConfig {
     private final Boolean authEnabled;
     private final Boolean sslEnabled;
     private final Boolean debug;
-
-    public String getProtocol() {
-        return protocol;
-    }
 
     public String getHost() {
         return host;
@@ -59,7 +60,6 @@ public final class EmailConfig {
     }
 
     private EmailConfig(Builder builder) {
-       this.protocol = builder.protocol;
         this.host = builder.host;
         this.port = builder.port;
         this.username = builder.username;
@@ -76,7 +76,6 @@ public final class EmailConfig {
     }
 
     public static class Builder {
-        private String protocol = "smtp";
         private String host = "smtp.gmail.com";
         private Integer port = 587;
         private String username;
@@ -89,12 +88,6 @@ public final class EmailConfig {
 
 
         private Builder() {}
-
-        public Builder protocol(String protocol) {
-            if (StringUtils.isNullOrEmpty(protocol)) throw new NotifierException("protocol cannot be null or empty");
-            this.protocol = protocol;
-            return this;
-        }
 
         public Builder host(String host) {
             if (StringUtils.isNullOrEmpty(host)) throw new NotifierException("host cannot be null or empty");
@@ -121,6 +114,7 @@ public final class EmailConfig {
 
         public Builder fromEmail(String fromEmail) {
             if (StringUtils.isNullOrEmpty(fromEmail)) throw new NotifierException("fromEmail cannot be null or empty");
+            if (!StringUtils.isValidEmail(fromEmail)) throw new NotifierException("fromEmail is not valid");
             this.fromEmail = fromEmail;
             return this;
         }
@@ -147,12 +141,12 @@ public final class EmailConfig {
 
         public EmailConfig build() {
 
-            if (StringUtils.isNullOrEmpty(protocol)) throw new NotifierException("protocol cannot be null or empty");
             if (StringUtils.isNullOrEmpty(host)) throw new NotifierException("host cannot be null or empty");
             if (port == null) throw new NotifierException("port cannot be null");
             if (StringUtils.isNullOrEmpty(username)) throw new NotifierException("username cannot be null or empty");
             if (StringUtils.isNullOrEmpty(password)) throw new NotifierException("password cannot be null or empty");
             if (StringUtils.isNullOrEmpty(fromEmail)) throw new NotifierException("fromEmail cannot be null or empty");
+            if (!StringUtils.isValidEmail(fromEmail)) throw new NotifierException("fromEmail is not valid");
             if (startTlsEnabled == null) throw new NotifierException("startTlsEnabled cannot be null");
             if (authEnabled == null) throw new NotifierException("authEnabled cannot be null");
             if (sslEnabled == null) throw new NotifierException("sslEnabled cannot be null");

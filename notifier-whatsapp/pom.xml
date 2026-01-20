@@ -9,9 +9,9 @@
         <version>1.0.1</version>
     </parent>
 
-    <name>notifier-spring-boot-starter</name>
-    <artifactId>notifier-spring-boot-starter</artifactId>
-    <description>Module which manage dynamics configurations and integrate sms, email</description>
+    <artifactId>notifier-whatsapp</artifactId>
+    <name>notifier-whatsapp</name>
+    <description>Module which manage WhatsApp notification</description>
     <url>https://github.com/kkm237/notifier</url>
 
     <licenses>
@@ -46,44 +46,24 @@
         <system>GitHub Issues</system>
         <url>https://github.com/kkm237/notifier/issues</url>
     </issueManagement>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- Notifier core -->
         <dependency>
             <groupId>io.github.kkm237</groupId>
-            <artifactId>notifier-email</artifactId>
-            <version>1.0.1</version>
+            <artifactId>notifier-core</artifactId>
         </dependency>
-
+        <!-- Twilio SDK -->
         <dependency>
-            <groupId>io.github.kkm237</groupId>
-            <artifactId>notifier-sms</artifactId>
-            <version>1.0.1</version>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>11.0.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.kkm237</groupId>
-            <artifactId>notifier-whatsapp</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-
     </dependencies>
 
 </project>

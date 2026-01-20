@@ -7,6 +7,8 @@ import io.github.kkm237.notifier.sms.SmsConfig;
 import io.github.kkm237.notifier.sms.SmsNotifierImpl;
 import io.github.kkm237.notifier.starter.service.NotifierService;
 import io.github.kkm237.notifier.starter.service.NotifierServiceImpl;
+import io.github.kkm237.notifier.whatsapp.WhatsAppConfig;
+import io.github.kkm237.notifier.whatsapp.WhatsAppNotifierImpl;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,7 +18,16 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 
-
+/**
+ * @implNote Declaration of all beans for people who want to integrate all channels notification.
+ * <p>For activate one bean make enabled true in your configuration file</p>
+ * @author Maximilien kengne kongne
+ * @since 16.01.2026
+ * @version 1.0.0
+ * @see io.github.kkm237.notifier.email.EmailConfig
+ * @see io.github.kkm237.notifier.sms.SmsConfig
+ * @see io.github.kkm237.notifier.whatsapp.WhatsAppConfig
+ */
 @Configuration
 @AutoConfiguration
 @EnableConfigurationProperties(NotifierProperties.class)
@@ -28,7 +39,6 @@ public class NotifierAutoConfiguration {
         NotifierProperties.Email props = properties.getEmail();
 
         EmailConfig config = EmailConfig.builder()
-                .protocol(props.getProtocol())
                 .host(props.getHost())
                 .port(props.getPort())
                 .username(props.getUsername())
@@ -55,6 +65,20 @@ public class NotifierAutoConfiguration {
                 .build();
 
         return new SmsNotifierImpl(config);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "notifier.whatsapp", name = "enabled", havingValue = "true")
+    public Notifier whatsappNotifierImpl(NotifierProperties properties) {
+        NotifierProperties.WhatsApp whatsapp = properties.getWhatsapp();
+
+        WhatsAppConfig config = WhatsAppConfig.builder()
+                .accountSid(whatsapp.getAccountSid())
+                .authToken(whatsapp.getAuthToken())
+                .fromPhone(whatsapp.getFromPhone())
+                .build();
+
+        return new WhatsAppNotifierImpl(config);
     }
 
     @Bean
