@@ -8,7 +8,7 @@ Module d'envoi d'emails utilisant Jakarta Mail API. **Framework-agnostic** - fon
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-email</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 

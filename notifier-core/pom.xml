@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.github.kkm237</groupId>
         <artifactId>notifier</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
     <name>notifier-core</name>
     <artifactId>notifier-core</artifactId>

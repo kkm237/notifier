@@ -8,7 +8,7 @@ Module de base contenant les API et interfaces communes pour tous les canaux de 
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-core</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -119,13 +119,6 @@ throw new ChannelNotSupportedException(NotifierPayload.Channel.SMS);
 
 // Échec d'envoi
 throw new NotifierSendFailedException("Failed to send", cause);
-```
-
-## 🧪 Tests
-
-```bash
-cd notifier-core
-mvn test
 ```
 
 ## 📚 Voir aussi

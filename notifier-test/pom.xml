@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.kkm237</groupId>
         <artifactId>notifier</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     <name>notifier-test</name>
@@ -61,9 +61,8 @@
         <dependency>
             <groupId>io.github.kkm237</groupId>
             <artifactId>notifier-spring-boot-starter</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
-
         <!-- GreenMail - Serveur SMTP in-memory pour tests -->
         <dependency>
             <groupId>com.icegreen</groupId>
@@ -71,7 +70,6 @@
             <version>2.0.1</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Spring Boot Test (for starter tests) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,7 +91,5 @@
         </plugins>
 
     </build>
-
-
 
 </project>

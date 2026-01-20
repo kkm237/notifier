@@ -8,7 +8,7 @@ Module d'envoi de SMS utilisant l'API Twilio. **Framework-agnostic** - fonctionn
 <dependency>
     <groupId>io.github.kkm237</groupId>
     <artifactId>notifier-sms</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -30,33 +30,16 @@ Module d'envoi de SMS utilisant l'API Twilio. **Framework-agnostic** - fonctionn
 
 ## 🚀 Utilisation
 
-### Configuration et Envoi d'un sms
+### Configuration 
 
 ```java
-import io.github.kkm237.notifier.core.model.Notifier;
-import io.github.kkm237.notifier.core.model.NotifierPayload;
 import io.github.kkm237.notifier.sms.SmsConfig;
-import io.github.kkm237.notifier.sms.SmsNotifierImpl;
 
-public class SmsSample {
-   public static void main(String[] args) {
       SmsConfig config = SmsConfig.builder()
               .accountSid("ACxxxxxxxxxxxxxxxxxxxxxxxxxx")
               .authToken("your_auth_token")
               .fromPhone("+15551234567")
               .build();
-
-      Notifier notifier = new SmsNotifierImpl(config);
-      
-      NotifierPayload payload = NotifierPayload.builder()
-              .channel(NotificationChannel.SMS)
-              .recipient("+237612345678")
-              .body("Votre code de vérification est: 123456")
-              .build();
-      notifier.send(payload);
-   }
-}
-
 ```
 
 ## 📱 Configuration Twilio
@@ -127,7 +110,7 @@ import io.github.kkm237.notifier.sms.SmsConfig;
 import io.github.kkm237.notifier.sms.SmsNotifierImpl;
 
 public class SmsSample {
-   public static void main(String[] args) {
+   static void main(String[] args) {
       SmsConfig config = SmsConfig.builder()
               .accountSid("ACxxxxxxxxxxxxxxxxxxxxxxxxxx")
               .authToken("your_auth_token")
@@ -135,10 +118,11 @@ public class SmsSample {
               .build();
 
       Notifier notifier = new SmsNotifierImpl(config);
-      String code = generateVerificationCode(); // "123456"
+
+      String code = generateVerificationCode();
 
       NotifierPayload payload = NotifierPayload.builder()
-              .channel(NotificationChannel.SMS)
+              .channel(NotifierPayload.Channel.SMS)
               .recipient("+237612345678")
               .body("Votre code de vérification est: " + code +
                       ". Valide pendant 5 minutes.")
