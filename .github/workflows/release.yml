@@ -28,7 +28,7 @@ jobs:
         # extract tag version (ex: v1.0.0 -> 1.0.0) for inject in Maven
         run: |
           mvn clean deploy -DskipTests -pl '!notifier-test'
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-#          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        env:
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
